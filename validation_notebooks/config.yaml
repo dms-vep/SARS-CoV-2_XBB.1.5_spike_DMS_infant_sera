@@ -1,0 +1,19 @@
+# Specify configuration
+
+# mAb neutralization data
+serum_neuts_cincinnati: data/serum_neuts/serum_neuts_Cincinnati.csv
+serum_neuts_all: data/serum_neuts/serum_neuts_all.csv
+virus_titers: data/virus_titers/virus_titers.csv
+
+#depletions
+RBD_depletion: data/RBD_depletion/RBDdepletion.csv
+
+
+# Results
+resultsdir: results/
+summary_dir: results/summary/
+neuts: results/neuts.csv
+
+
+
+

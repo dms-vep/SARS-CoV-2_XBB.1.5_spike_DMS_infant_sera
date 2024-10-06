@@ -1,0 +1,515 @@
+<h1 id="deep-mutational-scanning-of-sars-cov-2-xbb15-spike-and-primary-sera-response-mapping">Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike and primary sera response mapping</h1>
+<p>Analysis by Bernadeta Dadonaite and Jesse Bloom (2024)</p>
+<p>See <a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera">https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera</a> for full code.</p>
+<div class="toc"><span class="toctitle">Contents</span><ul>
+<li><a href="#barcode-to-codon-variant-lookup-table">Barcode to codon-variant lookup table</a></li>
+<li><a href="#count-barcodes-for-variants">Count barcodes for variants</a></li>
+<li><a href="#functional-effects-of-mutations">Functional effects of mutations</a></li>
+<li><a href="#antibodyserum-escape">Antibody/serum escape</a></li>
+<li><a href="#ace2-binding">ACE2 binding</a></li>
+<li><a href="#integrated-summary-plots">Integrated summary plots</a></li>
+</ul>
+</div>
+<h2 id="barcode-to-codon-variant-lookup-table">Barcode to codon-variant lookup table</h2>
+<h4 id="data-files">Data files</h4>
+<ul>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/gene_sequence/codon.fasta">parental codon sequence</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/gene_sequence/protein.fasta">parental protein sequence</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/variants/codon_variants.csv">barcode to codon-variant lookup table</a></li>
+</ul>
+<h2 id="count-barcodes-for-variants">Count barcodes for variants</h2>
+<h4 id="analysis-notebooks">Analysis notebooks</h4>
+<h4 id="data-files_1">Data files</h4>
+<ul>
+<li><details><summary>Barcode count CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-VSVG_control_293T_counts.csv">Lib1-230614-VSVG_control_293T</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-VSVG_control_293T_counts.csv">Lib2-230614-VSVG_control_293T</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-no-antibody_control_highACE2_counts.csv">Lib1-230614-no-antibody_control_highACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-no-antibody_control_highACE2_counts.csv">Lib2-230614-no-antibody_control_highACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-no-antibody_control_mediumACE2_counts.csv">Lib1-230614-no-antibody_control_mediumACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-no-antibody_control_mediumACE2_counts.csv">Lib2-230614-no-antibody_control_mediumACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-monomeric_ACE2_2.88_counts.csv">Lib1-230614-monomeric_ACE2_2.88</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-monomeric_ACE2_8.63_counts.csv">Lib1-230614-monomeric_ACE2_8.63</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-monomeric_ACE2_25.9_counts.csv">Lib1-230614-monomeric_ACE2_25.9</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-monomeric_ACE2_77.7_counts.csv">Lib1-230614-monomeric_ACE2_77.7</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-230614-monomeric_ACE2_233_counts.csv">Lib1-230614-monomeric_ACE2_233</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-monomeric_ACE2_2.88_counts.csv">Lib2-230614-monomeric_ACE2_2.88</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-monomeric_ACE2_8.63_counts.csv">Lib2-230614-monomeric_ACE2_8.63</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-monomeric_ACE2_25.9_counts.csv">Lib2-230614-monomeric_ACE2_25.9</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-monomeric_ACE2_77.7_counts.csv">Lib2-230614-monomeric_ACE2_77.7</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-230614-monomeric_ACE2_233_counts.csv">Lib2-230614-monomeric_ACE2_233</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-no-antibody_control_counts.csv">Lib1-240321-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-399_0.25_counts.csv">Lib1-240321-399_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-399_0.33_counts.csv">Lib1-240321-399_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-399_0.40_counts.csv">Lib1-240321-399_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-400_0.19_counts.csv">Lib1-240321-400_0.19</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-400_0.33_counts.csv">Lib1-240321-400_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240321-400_0.40_counts.csv">Lib1-240321-400_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-no-antibody_control_counts.csv">Lib2-240321-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-399_0.25_counts.csv">Lib2-240321-399_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-399_0.33_counts.csv">Lib2-240321-399_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-399_0.40_counts.csv">Lib2-240321-399_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-400_0.19_counts.csv">Lib2-240321-400_0.19</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-400_0.33_counts.csv">Lib2-240321-400_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240321-400_0.40_counts.csv">Lib2-240321-400_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-1-born2022_exposure1_0.037_counts.csv">Lib1-240801-infant-1-born2022_exposure1_0.037</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-1-born2022_exposure1_0.111_counts.csv">Lib1-240801-infant-1-born2022_exposure1_0.111</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-1-born2022_exposure1_0.304_counts.csv">Lib1-240801-infant-1-born2022_exposure1_0.304</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-1-born2022_exposure1_0.037_counts.csv">Lib2-240801-infant-1-born2022_exposure1_0.037</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-1-born2022_exposure1_0.111_counts.csv">Lib2-240801-infant-1-born2022_exposure1_0.111</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-1-born2022_exposure1_0.304_counts.csv">Lib2-240801-infant-1-born2022_exposure1_0.304</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-2-born2022_exposure1_0.016_counts.csv">Lib1-240801-infant-2-born2022_exposure1_0.016</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-2-born2022_exposure1_0.048_counts.csv">Lib1-240801-infant-2-born2022_exposure1_0.048</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-2-born2022_exposure1_0.16_counts.csv">Lib1-240801-infant-2-born2022_exposure1_0.16</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-2-born2022_exposure1_0.016_counts.csv">Lib2-240801-infant-2-born2022_exposure1_0.016</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-2-born2022_exposure1_0.048_counts.csv">Lib2-240801-infant-2-born2022_exposure1_0.048</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-2-born2022_exposure1_0.16_counts.csv">Lib2-240801-infant-2-born2022_exposure1_0.16</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-3-born2022_exposure1_0.041_counts.csv">Lib1-240801-infant-3-born2022_exposure1_0.041</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-3-born2022_exposure1_0.134_counts.csv">Lib1-240801-infant-3-born2022_exposure1_0.134</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-infant-3-born2022_exposure1_0.533_counts.csv">Lib1-240801-infant-3-born2022_exposure1_0.533</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-3-born2022_exposure1_0.041_counts.csv">Lib2-240801-infant-3-born2022_exposure1_0.041</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-3-born2022_exposure1_0.134_counts.csv">Lib2-240801-infant-3-born2022_exposure1_0.134</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-infant-3-born2022_exposure1_0.533_counts.csv">Lib2-240801-infant-3-born2022_exposure1_0.533</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240801-no-antibody_control_counts.csv">Lib1-240801-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240801-no-antibody_control_counts.csv">Lib2-240801-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-4-born2022_exposure1-0.429_counts.csv">Lib1-240903-infant-4-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-4-born2022_exposure1-1.125_counts.csv">Lib1-240903-infant-4-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-5-born2022_exposure1-0.429_counts.csv">Lib1-240903-infant-5-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-5-born2022_exposure1-1.125_counts.csv">Lib1-240903-infant-5-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-5-born2022_exposure2-0.003_counts.csv">Lib1-240903-infant-5-born2022_exposure2-0.003</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-5-born2022_exposure2-0.012_counts.csv">Lib1-240903-infant-5-born2022_exposure2-0.012</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-5-born2022_exposure2-0.05_counts.csv">Lib1-240903-infant-5-born2022_exposure2-0.05</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-6-born2023_exposure1-0.429_counts.csv">Lib1-240903-infant-6-born2023_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-6-born2023_exposure1-1.125_counts.csv">Lib1-240903-infant-6-born2023_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-6-born2023_exposure2-0.006_counts.csv">Lib1-240903-infant-6-born2023_exposure2-0.006</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-6-born2023_exposure2-0.024_counts.csv">Lib1-240903-infant-6-born2023_exposure2-0.024</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-infant-6-born2023_exposure2-0.102_counts.csv">Lib1-240903-infant-6-born2023_exposure2-0.102</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-240903-no-antibody_control_counts.csv">Lib1-240903-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-4-born2022_exposure1-0.429_counts.csv">Lib2-240903-infant-4-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-4-born2022_exposure1-1.125_counts.csv">Lib2-240903-infant-4-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-5-born2022_exposure1-0.429_counts.csv">Lib2-240903-infant-5-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-5-born2022_exposure1-1.125_counts.csv">Lib2-240903-infant-5-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-5-born2022_exposure2-0.003_counts.csv">Lib2-240903-infant-5-born2022_exposure2-0.003</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-5-born2022_exposure2-0.012_counts.csv">Lib2-240903-infant-5-born2022_exposure2-0.012</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-5-born2022_exposure2-0.05_counts.csv">Lib2-240903-infant-5-born2022_exposure2-0.05</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-6-born2023_exposure1-0.429_counts.csv">Lib2-240903-infant-6-born2023_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-6-born2023_exposure1-1.125_counts.csv">Lib2-240903-infant-6-born2023_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-6-born2023_exposure2-0.006_counts.csv">Lib2-240903-infant-6-born2023_exposure2-0.006</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-6-born2023_exposure2-0.024_counts.csv">Lib2-240903-infant-6-born2023_exposure2-0.024</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-infant-6-born2023_exposure2-0.102_counts.csv">Lib2-240903-infant-6-born2023_exposure2-0.102</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-240903-no-antibody_control_counts.csv">Lib2-240903-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-1-born2020_0.021_counts.csv">Lib1-241004-child-1-born2020_0.021</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-1-born2020_0.09_counts.csv">Lib1-241004-child-1-born2020_0.09</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-1-born2020_0.411_counts.csv">Lib1-241004-child-1-born2020_0.411</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-2-born2021_0.053_counts.csv">Lib1-241004-child-2-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-2-born2021_0.25_counts.csv">Lib1-241004-child-2-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-2-born2021_1.333_counts.csv">Lib1-241004-child-2-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-3-born2021_0.053_counts.csv">Lib1-241004-child-3-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-3-born2021_0.25_counts.csv">Lib1-241004-child-3-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-child-3-born2021_1.333_counts.csv">Lib1-241004-child-3-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib1-241004-no-antibody_control_counts.csv">Lib1-241004-no-antibody_control</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-1-born2020_0.021_counts.csv">Lib2-241004-child-1-born2020_0.021</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-1-born2020_0.09_counts.csv">Lib2-241004-child-1-born2020_0.09</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-1-born2020_0.411_counts.csv">Lib2-241004-child-1-born2020_0.411</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-2-born2021_0.053_counts.csv">Lib2-241004-child-2-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-2-born2021_0.25_counts.csv">Lib2-241004-child-2-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-2-born2021_1.333_counts.csv">Lib2-241004-child-2-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-3-born2021_0.053_counts.csv">Lib2-241004-child-3-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-3-born2021_0.25_counts.csv">Lib2-241004-child-3-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-child-3-born2021_1.333_counts.csv">Lib2-241004-child-3-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/barcode_counts/Lib2-241004-no-antibody_control_counts.csv">Lib2-241004-no-antibody_control</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h2 id="functional-effects-of-mutations">Functional effects of mutations</h2>
+<h4 id="final-summary-plots">Final summary plots</h4>
+<ul>
+<li><details><summary>Interactive plots of average mutation functional effects (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/293T_high_ACE2_entry_func_effects.html">293T_high_ACE2_entry</a></li>
+<li><a href="htmls/293T_medium_ACE2_entry_func_effects.html">293T_medium_ACE2_entry</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Interactive plots of average mutation latent-phenotype effects (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/293T_high_ACE2_entry_latent_effects.html">293T_high_ACE2_entry</a></li>
+<li><a href="htmls/293T_medium_ACE2_entry_latent_effects.html">293T_medium_ACE2_entry</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Interactive plots of average shifts in functional effects (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/date_comparison_shifts.html">date_comparison</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h4 id="analysis-notebooks_1">Analysis notebooks</h4>
+<ul>
+<li><a href="notebooks/analyze_func_scores.html">Analysis of functional scores</a></li>
+<li><details><summary>Notebooks with per-selection global epistasis fitting (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/func_effects_global_epistasis_Lib1-230614_high_ACE2.html">Lib1-230614_high_ACE2</a></li>
+<li><a href="notebooks/func_effects_global_epistasis_Lib2-230614_high_ACE2.html">Lib2-230614_high_ACE2</a></li>
+<li><a href="notebooks/func_effects_global_epistasis_Lib1-230614_medium_ACE2.html">Lib1-230614_medium_ACE2</a></li>
+<li><a href="notebooks/func_effects_global_epistasis_Lib2-230614_medium_ACE2.html">Lib2-230614_medium_ACE2</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Notebooks averaging mutation functional effects (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/avg_func_effects_293T_high_ACE2_entry.html">293T_high_ACE2_entry</a></li>
+<li><a href="notebooks/avg_func_effects_293T_medium_ACE2_entry.html">293T_medium_ACE2_entry</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Notebooks fitting shifts in functional effects (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/func_effect_shifts_Lib1-230614_ACE2_expression.html">Lib1-230614_ACE2_expression</a></li>
+<li><a href="notebooks/func_effect_shifts_Lib2-230614_ACE2_expression.html">Lib2-230614_ACE2_expression</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Notebooks averaging shifts in functional effects (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/avg_func_effect_shifts_date_comparison.html">date_comparison</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h4 id="data-files_2">Data files</h4>
+<ul>
+<li><details><summary>Per-variant functional score CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_scores/Lib1-230614_high_ACE2_func_scores.csv">Lib1-230614_high_ACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_scores/Lib2-230614_high_ACE2_func_scores.csv">Lib2-230614_high_ACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_scores/Lib1-230614_medium_ACE2_func_scores.csv">Lib1-230614_medium_ACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_scores/Lib2-230614_medium_ACE2_func_scores.csv">Lib2-230614_medium_ACE2</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Per-selection mutation functional effect CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/by_selection/Lib1-230614_high_ACE2_func_effects.csv">Lib1-230614_high_ACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/by_selection/Lib2-230614_high_ACE2_func_effects.csv">Lib2-230614_high_ACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/by_selection/Lib1-230614_medium_ACE2_func_effects.csv">Lib1-230614_medium_ACE2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/by_selection/Lib2-230614_medium_ACE2_func_effects.csv">Lib2-230614_medium_ACE2</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Average mutation functional effects (CSV files) (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/averages/293T_high_ACE2_entry_func_effects.csv">293T_high_ACE2_entry</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/averages/293T_medium_ACE2_entry_func_effects.csv">293T_medium_ACE2_entry</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Average mutation latent-phenotype effects (CSV files) (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/averages/293T_high_ACE2_entry_func_effects.csv">293T_high_ACE2_entry</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/averages/293T_medium_ACE2_entry_func_effects.csv">293T_medium_ACE2_entry</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Per-condition functional effect shifts CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effect_shifts/by_comparison/Lib1-230614_ACE2_expression_shifts.csv">Lib1-230614_ACE2_expression</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effect_shifts/by_comparison/Lib2-230614_ACE2_expression_shifts.csv">Lib2-230614_ACE2_expression</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Average shifts in functional effects (CSV files) (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effect_shifts/averages/date_comparison_shifts.csv">date_comparison</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h2 id="antibodyserum-escape">Antibody/serum escape</h2>
+<h4 id="final-summary-plots_1">Final summary plots</h4>
+<ul>
+<li><details><summary>antibody escape mutation effect plots (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/sera-3990519_mut_effect.html">sera-3990519</a></li>
+<li><a href="htmls/sera-4002223_mut_effect.html">sera-4002223</a></li>
+<li><a href="htmls/sera-infant-1-born2022_exposure1_mut_effect.html">sera-infant-1-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-2-born2022_exposure1_mut_effect.html">sera-infant-2-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-3-born2022_exposure1_mut_effect.html">sera-infant-3-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-4-born2022_exposure1_mut_effect.html">sera-infant-4-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-5-born2022_exposure1_mut_effect.html">sera-infant-5-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-5-born2022_exposure2_mut_effect.html">sera-infant-5-born2022_exposure2</a></li>
+<li><a href="htmls/sera-infant-6-born2023_exposure1_mut_effect.html">sera-infant-6-born2023_exposure1</a></li>
+<li><a href="htmls/sera-infant-6-born2023_exposure2_mut_effect.html">sera-infant-6-born2023_exposure2</a></li>
+<li><a href="htmls/sera-child-1-born2020_mut_effect.html">sera-child-1-born2020</a></li>
+<li><a href="htmls/sera-child-2-born2021_mut_effect.html">sera-child-2-born2021</a></li>
+<li><a href="htmls/sera-child-3-born2021_mut_effect.html">sera-child-3-born2021</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>antibody escape mutation ICXX plots (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/sera-3990519_mut_icXX.html">sera-3990519</a></li>
+<li><a href="htmls/sera-4002223_mut_icXX.html">sera-4002223</a></li>
+<li><a href="htmls/sera-infant-1-born2022_exposure1_mut_icXX.html">sera-infant-1-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-2-born2022_exposure1_mut_icXX.html">sera-infant-2-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-3-born2022_exposure1_mut_icXX.html">sera-infant-3-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-4-born2022_exposure1_mut_icXX.html">sera-infant-4-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-5-born2022_exposure1_mut_icXX.html">sera-infant-5-born2022_exposure1</a></li>
+<li><a href="htmls/sera-infant-5-born2022_exposure2_mut_icXX.html">sera-infant-5-born2022_exposure2</a></li>
+<li><a href="htmls/sera-infant-6-born2023_exposure1_mut_icXX.html">sera-infant-6-born2023_exposure1</a></li>
+<li><a href="htmls/sera-infant-6-born2023_exposure2_mut_icXX.html">sera-infant-6-born2023_exposure2</a></li>
+<li><a href="htmls/sera-child-1-born2020_mut_icXX.html">sera-child-1-born2020</a></li>
+<li><a href="htmls/sera-child-2-born2021_mut_icXX.html">sera-child-2-born2021</a></li>
+<li><a href="htmls/sera-child-3-born2021_mut_icXX.html">sera-child-3-born2021</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h4 id="analysis-notebooks_2">Analysis notebooks</h4>
+<ul>
+<li><details><summary>Fits of polyclonal models to individual antibody escape selections (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240321-399.html">Lib1-240321-399</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240321-399.html">Lib2-240321-399</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240321-400.html">Lib1-240321-400</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240321-400.html">Lib2-240321-400</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240801-infant-1-born2022_exposure1.html">Lib1-240801-infant-1-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240801-infant-1-born2022_exposure1.html">Lib2-240801-infant-1-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240801-infant-2-born2022_exposure1.html">Lib1-240801-infant-2-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240801-infant-2-born2022_exposure1.html">Lib2-240801-infant-2-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240801-infant-3-born2022_exposure1.html">Lib1-240801-infant-3-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240801-infant-3-born2022_exposure1.html">Lib2-240801-infant-3-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240903-infant-4-born2022_exposure1.html">Lib1-240903-infant-4-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240903-infant-4-born2022_exposure1.html">Lib2-240903-infant-4-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240903-infant-5-born2022_exposure1.html">Lib1-240903-infant-5-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240903-infant-5-born2022_exposure1.html">Lib2-240903-infant-5-born2022_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240903-infant-5-born2022_exposure2.html">Lib1-240903-infant-5-born2022_exposure2</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240903-infant-5-born2022_exposure2.html">Lib2-240903-infant-5-born2022_exposure2</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240903-infant-6-born2023_exposure1.html">Lib1-240903-infant-6-born2023_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240903-infant-6-born2023_exposure1.html">Lib2-240903-infant-6-born2023_exposure1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-240903-infant-6-born2023_exposure2.html">Lib1-240903-infant-6-born2023_exposure2</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-240903-infant-6-born2023_exposure2.html">Lib2-240903-infant-6-born2023_exposure2</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-241004-child-1-born2020.html">Lib1-241004-child-1-born2020</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-241004-child-1-born2020.html">Lib2-241004-child-1-born2020</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-241004-child-2-born2021.html">Lib1-241004-child-2-born2021</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-241004-child-2-born2021.html">Lib2-241004-child-2-born2021</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib1-241004-child-3-born2021.html">Lib1-241004-child-3-born2021</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_Lib2-241004-child-3-born2021.html">Lib2-241004-child-3-born2021</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Average selections for antibody escape (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/avg_escape_antibody_escape_sera-3990519.html">sera-3990519</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-4002223.html">sera-4002223</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-1-born2022_exposure1.html">sera-infant-1-born2022_exposure1</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-2-born2022_exposure1.html">sera-infant-2-born2022_exposure1</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-3-born2022_exposure1.html">sera-infant-3-born2022_exposure1</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-4-born2022_exposure1.html">sera-infant-4-born2022_exposure1</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-5-born2022_exposure1.html">sera-infant-5-born2022_exposure1</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-5-born2022_exposure2.html">sera-infant-5-born2022_exposure2</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-6-born2023_exposure1.html">sera-infant-6-born2023_exposure1</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-infant-6-born2023_exposure2.html">sera-infant-6-born2023_exposure2</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-child-1-born2020.html">sera-child-1-born2020</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-child-2-born2021.html">sera-child-2-born2021</a></li>
+<li><a href="notebooks/avg_escape_antibody_escape_sera-child-3-born2021.html">sera-child-3-born2021</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h4 id="data-files_3">Data files</h4>
+<ul>
+<li><details><summary>Probability (fraction) escape for each variant in each antibody escape selection (CSVs) (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240321-399/Lib1-240321-399_0.25_prob_escape.csv">Lib1-240321-399 Lib1-240321-399_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240321-399/Lib1-240321-399_0.33_prob_escape.csv">Lib1-240321-399 Lib1-240321-399_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240321-399/Lib1-240321-399_0.40_prob_escape.csv">Lib1-240321-399 Lib1-240321-399_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240321-399/Lib2-240321-399_0.25_prob_escape.csv">Lib2-240321-399 Lib2-240321-399_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240321-399/Lib2-240321-399_0.33_prob_escape.csv">Lib2-240321-399 Lib2-240321-399_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240321-399/Lib2-240321-399_0.40_prob_escape.csv">Lib2-240321-399 Lib2-240321-399_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240321-400/Lib1-240321-400_0.19_prob_escape.csv">Lib1-240321-400 Lib1-240321-400_0.19</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240321-400/Lib1-240321-400_0.33_prob_escape.csv">Lib1-240321-400 Lib1-240321-400_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240321-400/Lib1-240321-400_0.40_prob_escape.csv">Lib1-240321-400 Lib1-240321-400_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240321-400/Lib2-240321-400_0.19_prob_escape.csv">Lib2-240321-400 Lib2-240321-400_0.19</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240321-400/Lib2-240321-400_0.33_prob_escape.csv">Lib2-240321-400 Lib2-240321-400_0.33</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240321-400/Lib2-240321-400_0.40_prob_escape.csv">Lib2-240321-400 Lib2-240321-400_0.40</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-1-born2022_exposure1/Lib1-240801-infant-1-born2022_exposure1_0.037_prob_escape.csv">Lib1-240801-infant-1-born2022_exposure1 Lib1-240801-infant-1-born2022_exposure1_0.037</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-1-born2022_exposure1/Lib1-240801-infant-1-born2022_exposure1_0.111_prob_escape.csv">Lib1-240801-infant-1-born2022_exposure1 Lib1-240801-infant-1-born2022_exposure1_0.111</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-1-born2022_exposure1/Lib1-240801-infant-1-born2022_exposure1_0.304_prob_escape.csv">Lib1-240801-infant-1-born2022_exposure1 Lib1-240801-infant-1-born2022_exposure1_0.304</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-1-born2022_exposure1/Lib2-240801-infant-1-born2022_exposure1_0.037_prob_escape.csv">Lib2-240801-infant-1-born2022_exposure1 Lib2-240801-infant-1-born2022_exposure1_0.037</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-1-born2022_exposure1/Lib2-240801-infant-1-born2022_exposure1_0.111_prob_escape.csv">Lib2-240801-infant-1-born2022_exposure1 Lib2-240801-infant-1-born2022_exposure1_0.111</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-1-born2022_exposure1/Lib2-240801-infant-1-born2022_exposure1_0.304_prob_escape.csv">Lib2-240801-infant-1-born2022_exposure1 Lib2-240801-infant-1-born2022_exposure1_0.304</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-2-born2022_exposure1/Lib1-240801-infant-2-born2022_exposure1_0.016_prob_escape.csv">Lib1-240801-infant-2-born2022_exposure1 Lib1-240801-infant-2-born2022_exposure1_0.016</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-2-born2022_exposure1/Lib1-240801-infant-2-born2022_exposure1_0.048_prob_escape.csv">Lib1-240801-infant-2-born2022_exposure1 Lib1-240801-infant-2-born2022_exposure1_0.048</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-2-born2022_exposure1/Lib1-240801-infant-2-born2022_exposure1_0.16_prob_escape.csv">Lib1-240801-infant-2-born2022_exposure1 Lib1-240801-infant-2-born2022_exposure1_0.16</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-2-born2022_exposure1/Lib2-240801-infant-2-born2022_exposure1_0.016_prob_escape.csv">Lib2-240801-infant-2-born2022_exposure1 Lib2-240801-infant-2-born2022_exposure1_0.016</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-2-born2022_exposure1/Lib2-240801-infant-2-born2022_exposure1_0.048_prob_escape.csv">Lib2-240801-infant-2-born2022_exposure1 Lib2-240801-infant-2-born2022_exposure1_0.048</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-2-born2022_exposure1/Lib2-240801-infant-2-born2022_exposure1_0.16_prob_escape.csv">Lib2-240801-infant-2-born2022_exposure1 Lib2-240801-infant-2-born2022_exposure1_0.16</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-3-born2022_exposure1/Lib1-240801-infant-3-born2022_exposure1_0.041_prob_escape.csv">Lib1-240801-infant-3-born2022_exposure1 Lib1-240801-infant-3-born2022_exposure1_0.041</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-3-born2022_exposure1/Lib1-240801-infant-3-born2022_exposure1_0.134_prob_escape.csv">Lib1-240801-infant-3-born2022_exposure1 Lib1-240801-infant-3-born2022_exposure1_0.134</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240801-infant-3-born2022_exposure1/Lib1-240801-infant-3-born2022_exposure1_0.533_prob_escape.csv">Lib1-240801-infant-3-born2022_exposure1 Lib1-240801-infant-3-born2022_exposure1_0.533</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-3-born2022_exposure1/Lib2-240801-infant-3-born2022_exposure1_0.041_prob_escape.csv">Lib2-240801-infant-3-born2022_exposure1 Lib2-240801-infant-3-born2022_exposure1_0.041</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-3-born2022_exposure1/Lib2-240801-infant-3-born2022_exposure1_0.134_prob_escape.csv">Lib2-240801-infant-3-born2022_exposure1 Lib2-240801-infant-3-born2022_exposure1_0.134</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240801-infant-3-born2022_exposure1/Lib2-240801-infant-3-born2022_exposure1_0.533_prob_escape.csv">Lib2-240801-infant-3-born2022_exposure1 Lib2-240801-infant-3-born2022_exposure1_0.533</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-4-born2022_exposure1/Lib1-240903-infant-4-born2022_exposure1-0.429_prob_escape.csv">Lib1-240903-infant-4-born2022_exposure1 Lib1-240903-infant-4-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-4-born2022_exposure1/Lib1-240903-infant-4-born2022_exposure1-1.125_prob_escape.csv">Lib1-240903-infant-4-born2022_exposure1 Lib1-240903-infant-4-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-4-born2022_exposure1/Lib2-240903-infant-4-born2022_exposure1-0.429_prob_escape.csv">Lib2-240903-infant-4-born2022_exposure1 Lib2-240903-infant-4-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-4-born2022_exposure1/Lib2-240903-infant-4-born2022_exposure1-1.125_prob_escape.csv">Lib2-240903-infant-4-born2022_exposure1 Lib2-240903-infant-4-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-5-born2022_exposure1/Lib1-240903-infant-5-born2022_exposure1-0.429_prob_escape.csv">Lib1-240903-infant-5-born2022_exposure1 Lib1-240903-infant-5-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-5-born2022_exposure1/Lib1-240903-infant-5-born2022_exposure1-1.125_prob_escape.csv">Lib1-240903-infant-5-born2022_exposure1 Lib1-240903-infant-5-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-5-born2022_exposure1/Lib2-240903-infant-5-born2022_exposure1-0.429_prob_escape.csv">Lib2-240903-infant-5-born2022_exposure1 Lib2-240903-infant-5-born2022_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-5-born2022_exposure1/Lib2-240903-infant-5-born2022_exposure1-1.125_prob_escape.csv">Lib2-240903-infant-5-born2022_exposure1 Lib2-240903-infant-5-born2022_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-5-born2022_exposure2/Lib1-240903-infant-5-born2022_exposure2-0.003_prob_escape.csv">Lib1-240903-infant-5-born2022_exposure2 Lib1-240903-infant-5-born2022_exposure2-0.003</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-5-born2022_exposure2/Lib1-240903-infant-5-born2022_exposure2-0.012_prob_escape.csv">Lib1-240903-infant-5-born2022_exposure2 Lib1-240903-infant-5-born2022_exposure2-0.012</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-5-born2022_exposure2/Lib1-240903-infant-5-born2022_exposure2-0.05_prob_escape.csv">Lib1-240903-infant-5-born2022_exposure2 Lib1-240903-infant-5-born2022_exposure2-0.05</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-5-born2022_exposure2/Lib2-240903-infant-5-born2022_exposure2-0.003_prob_escape.csv">Lib2-240903-infant-5-born2022_exposure2 Lib2-240903-infant-5-born2022_exposure2-0.003</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-5-born2022_exposure2/Lib2-240903-infant-5-born2022_exposure2-0.012_prob_escape.csv">Lib2-240903-infant-5-born2022_exposure2 Lib2-240903-infant-5-born2022_exposure2-0.012</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-5-born2022_exposure2/Lib2-240903-infant-5-born2022_exposure2-0.05_prob_escape.csv">Lib2-240903-infant-5-born2022_exposure2 Lib2-240903-infant-5-born2022_exposure2-0.05</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-6-born2023_exposure1/Lib1-240903-infant-6-born2023_exposure1-0.429_prob_escape.csv">Lib1-240903-infant-6-born2023_exposure1 Lib1-240903-infant-6-born2023_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-6-born2023_exposure1/Lib1-240903-infant-6-born2023_exposure1-1.125_prob_escape.csv">Lib1-240903-infant-6-born2023_exposure1 Lib1-240903-infant-6-born2023_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-6-born2023_exposure1/Lib2-240903-infant-6-born2023_exposure1-0.429_prob_escape.csv">Lib2-240903-infant-6-born2023_exposure1 Lib2-240903-infant-6-born2023_exposure1-0.429</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-6-born2023_exposure1/Lib2-240903-infant-6-born2023_exposure1-1.125_prob_escape.csv">Lib2-240903-infant-6-born2023_exposure1 Lib2-240903-infant-6-born2023_exposure1-1.125</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-6-born2023_exposure2/Lib1-240903-infant-6-born2023_exposure2-0.006_prob_escape.csv">Lib1-240903-infant-6-born2023_exposure2 Lib1-240903-infant-6-born2023_exposure2-0.006</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-6-born2023_exposure2/Lib1-240903-infant-6-born2023_exposure2-0.024_prob_escape.csv">Lib1-240903-infant-6-born2023_exposure2 Lib1-240903-infant-6-born2023_exposure2-0.024</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-240903-infant-6-born2023_exposure2/Lib1-240903-infant-6-born2023_exposure2-0.102_prob_escape.csv">Lib1-240903-infant-6-born2023_exposure2 Lib1-240903-infant-6-born2023_exposure2-0.102</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-6-born2023_exposure2/Lib2-240903-infant-6-born2023_exposure2-0.006_prob_escape.csv">Lib2-240903-infant-6-born2023_exposure2 Lib2-240903-infant-6-born2023_exposure2-0.006</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-6-born2023_exposure2/Lib2-240903-infant-6-born2023_exposure2-0.024_prob_escape.csv">Lib2-240903-infant-6-born2023_exposure2 Lib2-240903-infant-6-born2023_exposure2-0.024</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-240903-infant-6-born2023_exposure2/Lib2-240903-infant-6-born2023_exposure2-0.102_prob_escape.csv">Lib2-240903-infant-6-born2023_exposure2 Lib2-240903-infant-6-born2023_exposure2-0.102</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-1-born2020/Lib1-241004-child-1-born2020_0.021_prob_escape.csv">Lib1-241004-child-1-born2020 Lib1-241004-child-1-born2020_0.021</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-1-born2020/Lib1-241004-child-1-born2020_0.09_prob_escape.csv">Lib1-241004-child-1-born2020 Lib1-241004-child-1-born2020_0.09</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-1-born2020/Lib1-241004-child-1-born2020_0.411_prob_escape.csv">Lib1-241004-child-1-born2020 Lib1-241004-child-1-born2020_0.411</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-1-born2020/Lib2-241004-child-1-born2020_0.021_prob_escape.csv">Lib2-241004-child-1-born2020 Lib2-241004-child-1-born2020_0.021</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-1-born2020/Lib2-241004-child-1-born2020_0.09_prob_escape.csv">Lib2-241004-child-1-born2020 Lib2-241004-child-1-born2020_0.09</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-1-born2020/Lib2-241004-child-1-born2020_0.411_prob_escape.csv">Lib2-241004-child-1-born2020 Lib2-241004-child-1-born2020_0.411</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-2-born2021/Lib1-241004-child-2-born2021_0.053_prob_escape.csv">Lib1-241004-child-2-born2021 Lib1-241004-child-2-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-2-born2021/Lib1-241004-child-2-born2021_0.25_prob_escape.csv">Lib1-241004-child-2-born2021 Lib1-241004-child-2-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-2-born2021/Lib1-241004-child-2-born2021_1.333_prob_escape.csv">Lib1-241004-child-2-born2021 Lib1-241004-child-2-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-2-born2021/Lib2-241004-child-2-born2021_0.053_prob_escape.csv">Lib2-241004-child-2-born2021 Lib2-241004-child-2-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-2-born2021/Lib2-241004-child-2-born2021_0.25_prob_escape.csv">Lib2-241004-child-2-born2021 Lib2-241004-child-2-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-2-born2021/Lib2-241004-child-2-born2021_1.333_prob_escape.csv">Lib2-241004-child-2-born2021 Lib2-241004-child-2-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-3-born2021/Lib1-241004-child-3-born2021_0.053_prob_escape.csv">Lib1-241004-child-3-born2021 Lib1-241004-child-3-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-3-born2021/Lib1-241004-child-3-born2021_0.25_prob_escape.csv">Lib1-241004-child-3-born2021 Lib1-241004-child-3-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib1-241004-child-3-born2021/Lib1-241004-child-3-born2021_1.333_prob_escape.csv">Lib1-241004-child-3-born2021 Lib1-241004-child-3-born2021_1.333</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-3-born2021/Lib2-241004-child-3-born2021_0.053_prob_escape.csv">Lib2-241004-child-3-born2021 Lib2-241004-child-3-born2021_0.053</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-3-born2021/Lib2-241004-child-3-born2021_0.25_prob_escape.csv">Lib2-241004-child-3-born2021 Lib2-241004-child-3-born2021_0.25</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/by_selection/Lib2-241004-child-3-born2021/Lib2-241004-child-3-born2021_1.333_prob_escape.csv">Lib2-241004-child-3-born2021 Lib2-241004-child-3-born2021_1.333</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>antibody escape CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-3990519_mut_effect.csv">sera-3990519</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-4002223_mut_effect.csv">sera-4002223</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-1-born2022_exposure1_mut_effect.csv">sera-infant-1-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-2-born2022_exposure1_mut_effect.csv">sera-infant-2-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-3-born2022_exposure1_mut_effect.csv">sera-infant-3-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-4-born2022_exposure1_mut_effect.csv">sera-infant-4-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-5-born2022_exposure1_mut_effect.csv">sera-infant-5-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-5-born2022_exposure2_mut_effect.csv">sera-infant-5-born2022_exposure2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-6-born2023_exposure1_mut_effect.csv">sera-infant-6-born2023_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-6-born2023_exposure2_mut_effect.csv">sera-infant-6-born2023_exposure2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-child-1-born2020_mut_effect.csv">sera-child-1-born2020</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-child-2-born2021_mut_effect.csv">sera-child-2-born2021</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-child-3-born2021_mut_effect.csv">sera-child-3-born2021</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>antibody escape ICXX CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-3990519_mut_icXX.csv">sera-3990519</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-4002223_mut_icXX.csv">sera-4002223</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-1-born2022_exposure1_mut_icXX.csv">sera-infant-1-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-2-born2022_exposure1_mut_icXX.csv">sera-infant-2-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-3-born2022_exposure1_mut_icXX.csv">sera-infant-3-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-4-born2022_exposure1_mut_icXX.csv">sera-infant-4-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-5-born2022_exposure1_mut_icXX.csv">sera-infant-5-born2022_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-5-born2022_exposure2_mut_icXX.csv">sera-infant-5-born2022_exposure2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-6-born2023_exposure1_mut_icXX.csv">sera-infant-6-born2023_exposure1</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-infant-6-born2023_exposure2_mut_icXX.csv">sera-infant-6-born2023_exposure2</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-child-1-born2020_mut_icXX.csv">sera-child-1-born2020</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-child-2-born2021_mut_icXX.csv">sera-child-2-born2021</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/antibody_escape/averages/sera-child-3-born2021_mut_icXX.csv">sera-child-3-born2021</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h2 id="ace2-binding">ACE2 binding</h2>
+<h4 id="final-summary-plots_2">Final summary plots</h4>
+<ul>
+<li><details><summary>ACE2 binding mutation effect plots (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/monomeric_ACE2_mut_effect.html">monomeric_ACE2</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>ACE2 binding mutation ICXX plots (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="htmls/monomeric_ACE2_mut_icXX.html">monomeric_ACE2</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h4 id="analysis-notebooks_3">Analysis notebooks</h4>
+<ul>
+<li><details><summary>Fits of polyclonal models to individual ACE2 binding selections (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/fit_escape_ACE2_binding_Lib1-230614-monomeric_ACE2.html">Lib1-230614-monomeric_ACE2</a></li>
+<li><a href="notebooks/fit_escape_ACE2_binding_Lib2-230614-monomeric_ACE2.html">Lib2-230614-monomeric_ACE2</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>Average selections for ACE2 binding (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="notebooks/avg_escape_ACE2_binding_monomeric_ACE2.html">monomeric_ACE2</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h4 id="data-files_4">Data files</h4>
+<ul>
+<li><details><summary>Probability (fraction) escape for each variant in each ACE2 binding selection (CSVs) (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib1-230614-monomeric_ACE2/Lib1-230614-monomeric_ACE2_2.88_prob_escape.csv">Lib1-230614-monomeric_ACE2 Lib1-230614-monomeric_ACE2_2.88</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib1-230614-monomeric_ACE2/Lib1-230614-monomeric_ACE2_8.63_prob_escape.csv">Lib1-230614-monomeric_ACE2 Lib1-230614-monomeric_ACE2_8.63</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib1-230614-monomeric_ACE2/Lib1-230614-monomeric_ACE2_25.9_prob_escape.csv">Lib1-230614-monomeric_ACE2 Lib1-230614-monomeric_ACE2_25.9</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib1-230614-monomeric_ACE2/Lib1-230614-monomeric_ACE2_77.7_prob_escape.csv">Lib1-230614-monomeric_ACE2 Lib1-230614-monomeric_ACE2_77.7</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib1-230614-monomeric_ACE2/Lib1-230614-monomeric_ACE2_233_prob_escape.csv">Lib1-230614-monomeric_ACE2 Lib1-230614-monomeric_ACE2_233</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib2-230614-monomeric_ACE2/Lib2-230614-monomeric_ACE2_2.88_prob_escape.csv">Lib2-230614-monomeric_ACE2 Lib2-230614-monomeric_ACE2_2.88</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib2-230614-monomeric_ACE2/Lib2-230614-monomeric_ACE2_8.63_prob_escape.csv">Lib2-230614-monomeric_ACE2 Lib2-230614-monomeric_ACE2_8.63</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib2-230614-monomeric_ACE2/Lib2-230614-monomeric_ACE2_25.9_prob_escape.csv">Lib2-230614-monomeric_ACE2 Lib2-230614-monomeric_ACE2_25.9</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib2-230614-monomeric_ACE2/Lib2-230614-monomeric_ACE2_77.7_prob_escape.csv">Lib2-230614-monomeric_ACE2 Lib2-230614-monomeric_ACE2_77.7</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/by_selection/Lib2-230614-monomeric_ACE2/Lib2-230614-monomeric_ACE2_233_prob_escape.csv">Lib2-230614-monomeric_ACE2 Lib2-230614-monomeric_ACE2_233</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>ACE2 binding CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/averages/monomeric_ACE2_mut_effect.csv">monomeric_ACE2</a></li>
+</ul></details>
+
+</li>
+<li><details><summary>ACE2 binding ICXX CSVs (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/ACE2_binding/averages/monomeric_ACE2_mut_icXX.csv">monomeric_ACE2</a></li>
+</ul></details>
+
+</li>
+</ul>
+<h2 id="integrated-summary-plots">Integrated summary plots</h2>
+<h4 id="infant-sera">infant sera</h4>
+<ul>
+<li><a href="htmls/infant_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/infant_sera_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_sera.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+</ul>
+<h4 id="infant-vs-adult-sera">infant vs adult sera</h4>
+<ul>
+<li><a href="htmls/infant_vs_adult_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/infant_vs_adult_sera_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_vs_adult_sera.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_vs_adult_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+</ul>
