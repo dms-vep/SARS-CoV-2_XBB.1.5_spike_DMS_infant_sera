@@ -78,6 +78,17 @@ infant_vs_adult_sera:
         infant-4-born2022_exposure1: results/antibody_escape/averages/sera-infant-4-born2022_exposure1_mut_effect.csv
         infant-5-born2022_exposure1: results/antibody_escape/averages/sera-infant-5-born2022_exposure1_mut_effect.csv
         infant-6-born2023_exposure1: results/antibody_escape/averages/sera-infant-6-born2023_exposure1_mut_effect.csv
+    infant_post_vaccine sera:
+      stat: escape_median
+      positive_color: "#56B4E9"
+      negative_color: "#E69F00"
+      max_at_least: 1
+      min_at_least: -1
+      le_filters:
+        escape_std: 1.5
+      antibody_list:
+        infant-5-born2022_exposure2: results/antibody_escape/averages/sera-infant-5-born2022_exposure2_mut_effect.csv
+        infant-6-born2023_exposure2: results/antibody_escape/averages/sera-infant-6-born2023_exposure2_mut_effect.csv
     child sera:
       stat: escape_median
       positive_color: "#56B4E9"
