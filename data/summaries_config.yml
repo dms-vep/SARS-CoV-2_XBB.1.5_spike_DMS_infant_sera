@@ -26,12 +26,9 @@ infant_sera:
         sera-infant-3-born2022_exposure1: results/antibody_escape/averages/sera-infant-3-born2022_exposure1_mut_effect.csv
         sera-infant-4-born2022_exposure1: results/antibody_escape/averages/sera-infant-4-born2022_exposure1_mut_effect.csv
         sera-infant-5-born2022_exposure1: results/antibody_escape/averages/sera-infant-5-born2022_exposure1_mut_effect.csv
-        sera-infant-5-born2022_exposure2: results/antibody_escape/averages/sera-infant-5-born2022_exposure2_mut_effect.csv
+        # sera-infant-5-born2022_exposure2: results/antibody_escape/averages/sera-infant-5-born2022_exposure2_mut_effect.csv
         sera-infant-6-born2023_exposure1: results/antibody_escape/averages/sera-infant-6-born2023_exposure1_mut_effect.csv
-        sera-infant-6-born2023_exposure2: results/antibody_escape/averages/sera-infant-6-born2023_exposure2_mut_effect.csv
-        sera-child-1-born2020: results/antibody_escape/averages/sera-child-1-born2020_mut_effect.csv
-        sera-child-2-born2021: results/antibody_escape/averages/sera-child-2-born2021_mut_effect.csv
-        sera-child-3-born2021: results/antibody_escape/averages/sera-child-3-born2021_mut_effect.csv
+        # sera-infant-6-born2023_exposure2: results/antibody_escape/averages/sera-infant-6-born2023_exposure2_mut_effect.csv
   other_phenotypes:
     spike mediated entry:
       csv: results/func_effects/averages/293T_high_ACE2_entry_func_effects.csv
