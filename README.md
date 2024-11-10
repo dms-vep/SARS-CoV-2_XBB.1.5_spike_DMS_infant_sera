@@ -1,7 +1,7 @@
 # Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike and infant sera escape mapping
 Study by Bernadeta Dadonaite and Jesse Bloom.  
 
-This repo contains data for deep muattional scanning of XBB.1.5 spike and mapping of escape for infant sera with first post-XBB exposure
+This repo contains data for deep mutational scanning of XBB.1.5 spike and mapping of escape for infant sera with first post-XBB exposure
 For documentation of the analysis, see [https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/](https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/)
 
 ## Organization of this repo
@@ -35,7 +35,7 @@ To run on the Hutch cluster via [slurm](https://slurm.schedmd.com/), you can run
 The results of running the pipeline are placed in [./results/](results).
 Only some of these results are tracked to save space (see [.gitignore](.gitignore)).
 
-The pipeline builds HTML documentation for the pipeline in [./docs/](docs), which is rendered via GitHub Pages at [https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS/](https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS/).
+The pipeline builds HTML documentation for the pipeline in [./docs/](docs), which is rendered via GitHub Pages at [https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera](https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera).
 
 Analysis of validation experiments for DMS is in [./validation_notebooks/](validation_notebooks) 
 
