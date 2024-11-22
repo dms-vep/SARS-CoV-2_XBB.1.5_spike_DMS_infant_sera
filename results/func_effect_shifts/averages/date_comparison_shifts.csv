@@ -861,7 +861,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 104,W,G,-7.739,23.5,shift_medium_ACE2,-0.1658,-0.1888,101,NTD,-0.1773,2
 104,W,L,-1.94,30,shift_medium_ACE2,0.03398,-0.05737,101,NTD,-0.01169,2
 104,W,R,-7.655,23.5,shift_medium_ACE2,0.08705,0.06248,101,NTD,0.07476,2
-104,W,S,-4.957,17,shift_medium_ACE2,-0.0003545,-0.02673,101,NTD,-0.01354,2
+104,W,S,-4.957,17,shift_medium_ACE2,-0.0003547,-0.02673,101,NTD,-0.01354,2
 105,I,-,-7.396,14,shift_medium_ACE2,0.0795,0.0647,102,NTD,0.0721,2
 105,I,D,-7.093,18.5,shift_medium_ACE2,0.0002983,-0.2083,102,NTD,-0.104,2
 105,I,F,-0.7581,40.5,shift_medium_ACE2,0,0,102,NTD,0,2
@@ -1430,7 +1430,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 168,F,I,1.294,2,shift_medium_ACE2,0,0,164,NTD,0,2
 168,F,L,-0.7168,32.5,shift_medium_ACE2,-0.2014,0,164,NTD,-0.1007,2
 168,F,S,-1.283,17.5,shift_medium_ACE2,0,0,164,NTD,0,2
-168,F,V,-0.306,24.5,shift_medium_ACE2,0,0.0004851,164,NTD,0.0002425,2
+168,F,V,-0.306,24.5,shift_medium_ACE2,0,0.000485,164,NTD,0.0002425,2
 168,F,Y,0.07435,31.5,shift_medium_ACE2,0,0,164,NTD,0,2
 169,E,*,-0.6496,1,shift_medium_ACE2,0,0,165,NTD,0,2
 169,E,-,-2.116,23.5,shift_medium_ACE2,-0.02373,0,165,NTD,-0.01187,2
@@ -1518,7 +1518,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 176,L,Y,0.5225,12,shift_medium_ACE2,0,0,172,NTD,0,2
 177,M,-,0.1696,33.5,shift_medium_ACE2,0,0,173,NTD,0,2
 177,M,I,0.1684,41,shift_medium_ACE2,0.01695,0,173,NTD,0.008475,2
-177,M,K,0.1986,62,shift_medium_ACE2,0,0.0008946,173,NTD,0.0004473,2
+177,M,K,0.1986,62,shift_medium_ACE2,0,0.0008955,173,NTD,0.0004478,2
 177,M,L,-0.1729,35,shift_medium_ACE2,0,0,173,NTD,0,2
 177,M,N,-0.1259,35,shift_medium_ACE2,0,0,173,NTD,0,2
 177,M,R,-0.1646,33.5,shift_medium_ACE2,0,0,173,NTD,0,2
@@ -2643,7 +2643,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 289,V,Q,-3.239,17,shift_medium_ACE2,-0.003709,-0.07476,285,NTD,-0.03923,2
 289,V,R,-6.232,8,shift_medium_ACE2,0,0,285,NTD,0,2
 289,V,Y,-3.301,7.5,shift_medium_ACE2,0,0,285,NTD,0,2
-290,D,-,-6.081,11.5,shift_medium_ACE2,-0.0005494,0,286,NTD,-0.0002747,2
+290,D,-,-6.081,11.5,shift_medium_ACE2,-0.0005488,0,286,NTD,-0.0002744,2
 290,D,A,-0.5262,1,shift_medium_ACE2,,0,286,NTD,0,1
 290,D,C,-2.367,6.5,shift_medium_ACE2,0,0,286,NTD,0,2
 290,D,E,-7.676,20.5,shift_medium_ACE2,0.2086,-0.07381,286,NTD,0.0674,2
@@ -4887,7 +4887,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 519,H,N,0.0892,17,shift_medium_ACE2,0,0,515,RBD,0,2
 519,H,Q,0.02602,31.5,shift_medium_ACE2,0,0,515,RBD,0,2
 519,H,R,-2.145,13.5,shift_medium_ACE2,0,0,515,RBD,0,2
-519,H,Y,-0.552,26,shift_medium_ACE2,0,5.488e-05,515,RBD,2.744e-05,2
+519,H,Y,-0.552,26,shift_medium_ACE2,0,6.205e-05,515,RBD,3.103e-05,2
 520,A,D,0.5764,2,shift_medium_ACE2,0,,516,RBD,0,1
 520,A,E,-0.6108,16,shift_medium_ACE2,0,0,516,RBD,0,2
 520,A,G,0.2838,23,shift_medium_ACE2,0,0,516,RBD,0,2
@@ -8000,7 +8000,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 988,E,D,0.4821,30.5,shift_medium_ACE2,0,0,984,S2,0,2
 988,E,G,0.07,18,shift_medium_ACE2,0,0,984,S2,0,2
 988,E,K,-2.827,44.5,shift_medium_ACE2,-0.1075,-0.004205,984,S2,-0.05585,2
-988,E,R,-2.978,35,shift_medium_ACE2,-4.439e-05,-0.134,984,S2,-0.06702,2
+988,E,R,-2.978,35,shift_medium_ACE2,-4.438e-05,-0.134,984,S2,-0.06702,2
 988,E,V,-1.639,2,shift_medium_ACE2,0,0,984,S2,0,2
 989,A,C,-4.528,15,shift_medium_ACE2,0,0.004243,985,S2,0.002122,2
 989,A,D,-1.894,1,shift_medium_ACE2,,0,985,S2,0,1
@@ -9296,7 +9296,7 @@ site,wildtype,mutant,latent_phenotype_effect,times_seen,condition,Lib1-230614_AC
 1189,V,I,-0.3493,9.5,shift_medium_ACE2,0,0,1185,S2,0,2
 1189,V,L,0.2147,1,shift_medium_ACE2,0,,1185,S2,0,1
 1189,V,M,0.6554,11.5,shift_medium_ACE2,0,0,1185,S2,0,2
-1189,V,P,-6.049,7,shift_medium_ACE2,0,6.248e-05,1185,S2,3.124e-05,2
+1189,V,P,-6.049,7,shift_medium_ACE2,0,6.249e-05,1185,S2,3.125e-05,2
 1190,A,D,-0.235,2,shift_medium_ACE2,0,,1186,S2,0,1
 1190,A,S,-0.9982,10.5,shift_medium_ACE2,0,0,1186,S2,0,2
 1190,A,T,0.0983,34,shift_medium_ACE2,0,0,1186,S2,0,2
