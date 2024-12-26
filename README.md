@@ -27,6 +27,9 @@ To run the pipeline, do:
 
     snakemake -j 8 --use-conda -s dms-vep-pipeline-3/Snakefile
 
+Note that the pipeline is currently configured to start by processing the FASTQ files from the paths where they are stored on the Hutch server as specified in [data/barcode_runs.csv](data/barcode_runs.csv).
+To instead simply run the pipeline from the precomputed barcode counts files stored in this repo, set `use_precomputed_barcode_counts: true` in [config.yaml](config.yaml).
+
 To run on the Hutch cluster via [slurm](https://slurm.schedmd.com/), you can run the file [run_Hutch_cluster.bash](run_Hutch_cluster.bash):
 
     sbatch -c 8 run_Hutch_cluster.bash
