@@ -71,8 +71,7 @@ rule merge_sera_group_escape:
 rule configure_dms_viz:
     """Configure a JSON file for `dms-viz`."""
     input:
-        phenotypes_csv="results/summaries/infant_vs_adult_sera.csv",
-        per_antibody_escape_csv="results/summaries/infant_vs_adult_sera_per_antibody_escape.csv",
+        phenotypes_csv="results/summaries/sera_group_avgs.csv",
         site_numbering_map=config["site_numbering_map"],
         nb="notebooks/configure_dms_viz.ipynb",
     output:
@@ -92,7 +91,6 @@ rule configure_dms_viz:
         """
         papermill {input.nb} {output.nb} \
             -p phenotypes_csv {input.phenotypes_csv} \
-            -p per_antibody_escape_csv {input.per_antibody_escape_csv} \
             -p site_numbering_map {input.site_numbering_map} \
             -p dms_viz_json {output.dms_viz_json} \
             -p dms_viz_phenotypes {output.dms_viz_phenotypes} \
