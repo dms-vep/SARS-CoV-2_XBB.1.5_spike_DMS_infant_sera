@@ -43,6 +43,31 @@ rule get_adult_escape:
         "scripts/get_adult_escape.py"
 
 
+rule merge_sera_group_escape:
+    """Merge filtered escape values for all sera sets from individual group summaries."""
+    input:
+        csvs=[
+            f"results/summaries/{group}.csv"
+            for group in [
+                "WuhanHu1_imprinted_and_XBB_infected_adult_sera",
+                "WuhanHu1_imprinted_and_XBB_infected_children_sera",
+                "primary_XBB_infection_infant_sera",
+                "XBB_infected_and_vaccinated_infant_sera",
+            ]
+        ],
+    output:
+        csv="results/summaries/merged_sera_group_escape.csv",        
+    params:
+        times_seen=3,  # set to value used to filter when creating the input summaries
+        frac_models=1,  # set to value used to filter when creating the input summaries
+    log:
+        "results/logs/merge_sera_group_escape.txt",
+    conda:
+        os.path.join(config["pipeline_path"], "environment.yml")
+    script:
+        "scripts/merge_sera_group_escape.py"
+
+
 rule configure_dms_viz:
     """Configure a JSON file for `dms-viz`."""
     input:
