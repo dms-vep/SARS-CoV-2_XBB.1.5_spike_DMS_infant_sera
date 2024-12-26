@@ -1,5 +1,5 @@
 <h1 id="deep-mutational-scanning-of-sars-cov-2-xbb15-spike-and-primary-sera-response-mapping">Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike and primary sera response mapping</h1>
-<p>Analysis by Bernadeta Dadonaite and Jesse Bloom (2024)</p>
+<p>Analysis by Bernadeta Dadonaite and Jesse Bloom (2025)</p>
 <p>See <a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera">https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera</a> for full code.</p>
 <div class="toc"><span class="toctitle">Contents</span><ul>
 <li><a href="#barcode-to-codon-variant-lookup-table">Barcode to codon-variant lookup table</a></li>
@@ -19,6 +19,9 @@
 </ul>
 <h2 id="count-barcodes-for-variants">Count barcodes for variants</h2>
 <h4 id="analysis-notebooks">Analysis notebooks</h4>
+<ul>
+<li><a href="notebooks/analyze_variant_counts.html">Analysis of variant counts</a></li>
+</ul>
 <h4 id="data-files_1">Data files</h4>
 <ul>
 <li><details><summary>Barcode count CSVs (click triangle to expand/collapse)</summary><ul>
@@ -140,12 +143,6 @@
 </ul></details>
 
 </li>
-<li><details><summary>Interactive plots of average shifts in functional effects (click triangle to expand/collapse)</summary><ul>
-
-<li><a href="htmls/date_comparison_shifts.html">date_comparison</a></li>
-</ul></details>
-
-</li>
 </ul>
 <h4 id="analysis-notebooks_1">Analysis notebooks</h4>
 <ul>
@@ -163,19 +160,6 @@
 
 <li><a href="notebooks/avg_func_effects_293T_high_ACE2_entry.html">293T_high_ACE2_entry</a></li>
 <li><a href="notebooks/avg_func_effects_293T_medium_ACE2_entry.html">293T_medium_ACE2_entry</a></li>
-</ul></details>
-
-</li>
-<li><details><summary>Notebooks fitting shifts in functional effects (click triangle to expand/collapse)</summary><ul>
-
-<li><a href="notebooks/func_effect_shifts_Lib1-230614_ACE2_expression.html">Lib1-230614_ACE2_expression</a></li>
-<li><a href="notebooks/func_effect_shifts_Lib2-230614_ACE2_expression.html">Lib2-230614_ACE2_expression</a></li>
-</ul></details>
-
-</li>
-<li><details><summary>Notebooks averaging shifts in functional effects (click triangle to expand/collapse)</summary><ul>
-
-<li><a href="notebooks/avg_func_effect_shifts_date_comparison.html">date_comparison</a></li>
 </ul></details>
 
 </li>
@@ -211,19 +195,6 @@
 
 <li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/averages/293T_high_ACE2_entry_func_effects.csv">293T_high_ACE2_entry</a></li>
 <li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effects/averages/293T_medium_ACE2_entry_func_effects.csv">293T_medium_ACE2_entry</a></li>
-</ul></details>
-
-</li>
-<li><details><summary>Per-condition functional effect shifts CSVs (click triangle to expand/collapse)</summary><ul>
-
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effect_shifts/by_comparison/Lib1-230614_ACE2_expression_shifts.csv">Lib1-230614_ACE2_expression</a></li>
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effect_shifts/by_comparison/Lib2-230614_ACE2_expression_shifts.csv">Lib2-230614_ACE2_expression</a></li>
-</ul></details>
-
-</li>
-<li><details><summary>Average shifts in functional effects (CSV files) (click triangle to expand/collapse)</summary><ul>
-
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/func_effect_shifts/averages/date_comparison_shifts.csv">date_comparison</a></li>
 </ul></details>
 
 </li>
@@ -499,17 +470,43 @@
 </li>
 </ul>
 <h2 id="integrated-summary-plots">Integrated summary plots</h2>
-<h4 id="infant-sera">infant sera</h4>
+<h4 id="summary-default">summary default</h4>
 <ul>
-<li><a href="htmls/infant_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
-<li><a href="htmls/infant_sera_faceted.html">Summary plot (escape faceted)</a></li>
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_sera.csv">CSV summarizing results</a></li>
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+<li><a href="htmls/summary_default_overlaid.html">Summary plot</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/summary_default.csv">CSV summarizing results</a></li>
 </ul>
-<h4 id="infant-vs-adult-sera">infant vs adult sera</h4>
+<h4 id="wuhanhu1-imprinted-and-xbb-infected-adult-sera">WuhanHu1 imprinted and XBB infected adult sera</h4>
 <ul>
-<li><a href="htmls/infant_vs_adult_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
-<li><a href="htmls/infant_vs_adult_sera_faceted.html">Summary plot (escape faceted)</a></li>
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_vs_adult_sera.csv">CSV summarizing results</a></li>
-<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/infant_vs_adult_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+<li><a href="htmls/WuhanHu1_imprinted_and_XBB_infected_adult_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/WuhanHu1_imprinted_and_XBB_infected_adult_sera_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/WuhanHu1_imprinted_and_XBB_infected_adult_sera.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/WuhanHu1_imprinted_and_XBB_infected_adult_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+</ul>
+<h4 id="wuhanhu1-imprinted-and-xbb-infected-children-sera">WuhanHu1 imprinted and XBB infected children sera</h4>
+<ul>
+<li><a href="htmls/WuhanHu1_imprinted_and_XBB_infected_children_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/WuhanHu1_imprinted_and_XBB_infected_children_sera_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/WuhanHu1_imprinted_and_XBB_infected_children_sera.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/WuhanHu1_imprinted_and_XBB_infected_children_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+</ul>
+<h4 id="primary-xbb-infection-infant-sera">primary XBB infection infant sera</h4>
+<ul>
+<li><a href="htmls/primary_XBB_infection_infant_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/primary_XBB_infection_infant_sera_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/primary_XBB_infection_infant_sera.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/primary_XBB_infection_infant_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+</ul>
+<h4 id="xbb-infected-and-vaccinated-infant-sera">XBB infected and vaccinated infant sera</h4>
+<ul>
+<li><a href="htmls/XBB_infected_and_vaccinated_infant_sera_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/XBB_infected_and_vaccinated_infant_sera_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/XBB_infected_and_vaccinated_infant_sera.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/XBB_infected_and_vaccinated_infant_sera_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
+</ul>
+<h4 id="sera-group-avgs">sera group avgs</h4>
+<ul>
+<li><a href="htmls/sera_group_avgs_overlaid.html">Summary plot (escape overlaid)</a></li>
+<li><a href="htmls/sera_group_avgs_faceted.html">Summary plot (escape faceted)</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/sera_group_avgs.csv">CSV summarizing results</a></li>
+<li><a href="https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main/results/summaries/sera_group_avgs_per_antibody_escape.csv">CSV summarizing per-antibody results</a></li>
 </ul>

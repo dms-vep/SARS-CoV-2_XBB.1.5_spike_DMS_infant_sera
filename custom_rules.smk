@@ -43,11 +43,35 @@ rule get_adult_escape:
         "scripts/get_adult_escape.py"
 
 
+rule merge_sera_group_escape:
+    """Merge filtered escape values for all sera sets from individual group summaries."""
+    input:
+        csvs=[
+            f"results/summaries/{group}.csv"
+            for group in [
+                "WuhanHu1_imprinted_and_XBB_infected_adult_sera",
+                "WuhanHu1_imprinted_and_XBB_infected_children_sera",
+                "primary_XBB_infection_infant_sera",
+                "XBB_infected_and_vaccinated_infant_sera",
+            ]
+        ],
+    output:
+        csv="results/summaries/merged_sera_group_escape.csv",        
+    params:
+        times_seen=3,  # set to value used to filter when creating the input summaries
+        frac_models=1,  # set to value used to filter when creating the input summaries
+    log:
+        "results/logs/merge_sera_group_escape.txt",
+    conda:
+        os.path.join(config["pipeline_path"], "environment.yml")
+    script:
+        "scripts/merge_sera_group_escape.py"
+
+
 rule configure_dms_viz:
     """Configure a JSON file for `dms-viz`."""
     input:
-        phenotypes_csv="results/summaries/infant_vs_adult_sera.csv",
-        per_antibody_escape_csv="results/summaries/infant_vs_adult_sera_per_antibody_escape.csv",
+        phenotypes_csv="results/summaries/sera_group_avgs.csv",
         site_numbering_map=config["site_numbering_map"],
         nb="notebooks/configure_dms_viz.ipynb",
     output:
@@ -67,7 +91,6 @@ rule configure_dms_viz:
         """
         papermill {input.nb} {output.nb} \
             -p phenotypes_csv {input.phenotypes_csv} \
-            -p per_antibody_escape_csv {input.per_antibody_escape_csv} \
             -p site_numbering_map {input.site_numbering_map} \
             -p dms_viz_json {output.dms_viz_json} \
             -p dms_viz_phenotypes {output.dms_viz_phenotypes} \

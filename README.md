@@ -1,7 +1,9 @@
-# Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike and infant sera escape mapping
-Study by Bernadeta Dadonaite and Jesse Bloom.  
+# Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike to map escape from primary infection infants
+Study by Bernadeta Dadonaite and Jesse Bloom in collaboration with Mary Staat's group.
 
-This repo contains data for deep mutational scanning of XBB.1.5 spike and mapping of escape for infant sera with first post-XBB exposure
+This repo contains the data and code for pseudovirus deep mutational scanning of XBB.1.5 spike with respect to escape from sera from infants first exposed to XBB variants.
+The library used here and some of the comparator adult data are from the previously published study [Dadonaite et al (2024)](https://www.nature.com/articles/s41586-024-07636-1).
+
 For documentation of the analysis, see [https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/](https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/)
 
 ## Organization of this repo
@@ -27,6 +29,9 @@ To run the pipeline, do:
 
     snakemake -j 8 --use-conda -s dms-vep-pipeline-3/Snakefile
 
+Note that the pipeline is currently configured to start by processing the FASTQ files from the paths where they are stored on the Hutch server as specified in [data/barcode_runs.csv](data/barcode_runs.csv).
+To instead simply run the pipeline from the precomputed barcode counts files stored in this repo, set `use_precomputed_barcode_counts: true` in [config.yaml](config.yaml).
+
 To run on the Hutch cluster via [slurm](https://slurm.schedmd.com/), you can run the file [run_Hutch_cluster.bash](run_Hutch_cluster.bash):
 
     sbatch -c 8 run_Hutch_cluster.bash
@@ -38,7 +43,3 @@ Only some of these results are tracked to save space (see [.gitignore](.gitignor
 The pipeline builds HTML documentation for the pipeline in [./docs/](docs), which is rendered via GitHub Pages at [https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera](https://dms-vep.github.io/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera).
 
 Analysis of validation experiments for DMS is in [./validation_notebooks/](validation_notebooks) 
-
-### Library design
-The design of the mutant library is contained in [./library_design/](library_design).
-That design is not part of the pipeline but contains code that must be run separately with its own [conda](https://docs.conda.io/) environment.
