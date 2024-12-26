@@ -11,6 +11,13 @@ pipeline_path: dms-vep-pipeline-3
 docs: docs
 
 # ----------------------------------------------------------------------------
+# Configuration for VitePress homepage
+# https://github.com/dms-vep/dms-vep-pipeline-3/tree/main/homepage
+# ----------------------------------------------------------------------------
+homepage: homepage/public
+build_vitepress_homepage: true
+
+# ----------------------------------------------------------------------------
 # Details on repo, used for docs. Change this to details for your project.
 # ----------------------------------------------------------------------------
 
