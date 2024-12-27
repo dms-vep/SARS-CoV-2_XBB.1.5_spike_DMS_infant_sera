@@ -8,7 +8,10 @@ RBD_depletion_neuts: data/RBD_depletion/depletion_neuts.csv
 
 #depletions
 RBD_depletion: data/RBD_depletion/RBDdepletion.csv
-Greaney_2021: data/RBD_depletion/Greaney_2021_TableS1.csv
+Greaney_2021: data/RBD_depletion/Greaney_2021_30days_TableS1.csv
+
+#logoplots
+summary_csv: ../results/summaries/infant_vs_adult_sera.csv
 
 # Results
 resultsdir: results/
