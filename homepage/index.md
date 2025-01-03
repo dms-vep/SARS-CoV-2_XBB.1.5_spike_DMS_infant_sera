@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "SARS-CoV-2 XBB.1.5 spike escape from adult vs infant sera"
   tagline: "Pseudovirus deep mutational scanning of how spike mutations affect neutralization by humans with different exposure histories"
-  image: your-vep.png
+  image: spike-ntd-rbd.png
 features:
   - title: Average escape for each serum group
     details: Interactive plots summarizing average escape for each group
