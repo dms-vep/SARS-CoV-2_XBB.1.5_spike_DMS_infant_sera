@@ -14,3 +14,5 @@
 Results from all notebooks are in [./results](results).
 
 [./config.yaml/](config.yaml) contains data paths.
+
+Plasmid maps for spike used for pseudotyping [./plasmid_maps](plasmid_maps).
