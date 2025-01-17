@@ -98,7 +98,7 @@ primary_XBB_infection_infant_sera:
 XBB_infected_and_vaccinated_infant_sera:
   <<: *summary_default
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
-    XBB infected+vax infants:  # name each set of antibodies
+    XBB infected and vax infants:  # name each set of antibodies
       stat: escape_median  # statistic to use for escape
       positive_color: "#56B4E9"  # light blue, positive heatmap color
       negative_color: "#E69F00"  # orange, negative heatmap color
@@ -112,6 +112,8 @@ XBB_infected_and_vaccinated_infant_sera:
 
 sera_group_avgs:
   <<: *summary_default
+  lineplot_antibody_label_loc: top  # location of labels on lineplots
+  selectable_per_antibody_heatmap: False  # does heatmap allow per-antibody selection?
   antibody_escape:
     imprinted adults:
       stat: imprinted adults escape
@@ -120,7 +122,7 @@ sera_group_avgs:
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this
       antibody_list:
-        avg: results/summaries/merged_sera_group_escape.csv
+        imprinted adults: results/summaries/merged_sera_group_escape.csv
     imprinted children:
       stat: imprinted children escape
       positive_color: "#56B4E9"  # light blue, positive heatmap color
@@ -128,7 +130,7 @@ sera_group_avgs:
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this
       antibody_list:
-        avg: results/summaries/merged_sera_group_escape.csv
+        imprinted children: results/summaries/merged_sera_group_escape.csv
     XBB infected infants:
       stat: XBB infected infants escape
       positive_color: "#56B4E9"  # light blue, positive heatmap color
@@ -136,12 +138,12 @@ sera_group_avgs:
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this
       antibody_list:
-        avg: results/summaries/merged_sera_group_escape.csv
-    XBB infected+vax infants:
-      stat: XBB infected+vax infants escape
+        XBB infected infants: results/summaries/merged_sera_group_escape.csv
+    XBB infected and vax infants:
+      stat: XBB infected and vax infants escape
       positive_color: "#56B4E9"  # light blue, positive heatmap color
       negative_color: "#E69F00"  # orange, negative heatmap color
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this
       antibody_list:
-        avg: results/summaries/merged_sera_group_escape.csv
+        XBB infected and vax infants: results/summaries/merged_sera_group_escape.csv
