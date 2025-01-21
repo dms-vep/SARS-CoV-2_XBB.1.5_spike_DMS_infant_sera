@@ -21,7 +21,7 @@ features:
 ---
 
 ## Overview
-This website hosts interactive visualizations of the results reported in **Dadonaite et al (2025) [add citation]**, which is a study led by Bernadeta Dadonaite in the [Bloom lab](https://jbloomlab.org/) in collaboration with [Mary Staat's group](https://www.cincinnatichildrens.org/bio/s/mary-staat).
+This website hosts interactive visualizations of the results reported in [Dadonaite et al (2025)](https://www.biorxiv.org/content/10.1101/2025.01.17.633612v1), which is a study led by Bernadeta Dadonaite in the [Bloom lab](https://jbloomlab.org/) in collaboration with [Mary Staat's group](https://www.cincinnatichildrens.org/bio/s/mary-staat).
 
 The study involves using pseudovirus deep mutational scanning to measure how mutations to the SARS-CoV-2 XBB.1.5 spike affect neutralization by sera from four different groups representing different exposure histories:
  1. *Wuhan-Hu-1-imprinted and XBB\* infected adult sera*

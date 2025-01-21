@@ -1,5 +1,6 @@
 # Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike to map escape from primary infection infants
 Study by Bernadeta Dadonaite and Jesse Bloom in collaboration with Mary Staat's group.
+See [Dadonaite et al (2025)](https://www.biorxiv.org/content/10.1101/2025.01.17.633612v1) for details on the study.
 
 This repo contains the data and code for pseudovirus deep mutational scanning of XBB.1.5 spike with respect to escape from sera from infants first exposed to XBB variants.
 The library used here and some of the comparator adult data are from the previously published study [Dadonaite et al (2024)](https://www.nature.com/articles/s41586-024-07636-1).

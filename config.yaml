@@ -28,9 +28,9 @@ github_repo_url: https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_
 # and should not be needed for other pipelines.
 github_blob_url: https://github.com/dms-vep/SARS-CoV-2_XBB.1.5_spike_DMS_infant_sera/blob/main
 # Some descriptions and metadata about the analysis.
-description: Deep mutational scanning of SARS-CoV-2 XBB.1.5 spike and primary sera response mapping
+description: SARS-CoV-2 neutralizing antibody specificities differ dramatically between recently infected infants and immune-imprinted individuals
 year: 2025
-authors: Bernadeta Dadonaite and Jesse Bloom
+authors: "[Dadonaite et al](https://www.biorxiv.org/content/10.1101/2025.01.17.633612v1)"
 
 # ----------------------------------------------------------------------------
 # Site numbering, mutation classification, and neut standards
